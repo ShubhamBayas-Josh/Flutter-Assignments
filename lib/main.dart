@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'ProfileCardScreen.dart';
+import 'profile_card_screen.dart';
 
 void main() {
   runApp(const MyApp());
