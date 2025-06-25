@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'details_page.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -12,11 +14,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home Page')),
+      appBar: AppBar(title: const Text('Home Page')),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.black, Colors.deepPurple,Colors.black],
+            colors: [Colors.black, Colors.deepPurple, Colors.black],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -26,13 +28,12 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                child: Text('Go to Details'),
                 onPressed: () async {
                   final result = await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          DetailsPage(data: 'Hello from Home!'),
+                      const DetailsPage(data: 'Hello from Home!'),
                     ),
                   );
 
@@ -42,11 +43,14 @@ class _HomePageState extends State<HomePage> {
                     });
                   }
                 },
+                child: const Text('Go to Details'),
               ),
-              SizedBox(height: 20),
-              Text(
-                'Returned: $returnedData',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Text(
+                  'Returned: $returnedData',
+                  style: const TextStyle(fontSize: 18, color: Colors.white),
+                ),
               ),
             ],
           ),
