@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
 
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  void handleLogin(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content:  Text('Login successful!')),
+      );
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-
-    void handleLogin() {
-      if (formKey.currentState!.validate()) {
-        // Show SnackBar or dialog since we aren't using setState
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Login successful!')),
-        );
-      }
-    }
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -77,15 +75,16 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: handleLogin,
+                  onPressed: () => handleLogin(context),
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all<Color>(Colors.green),
-                    minimumSize: WidgetStateProperty.all<Size>(const Size(double.infinity, 50)),
+                    minimumSize: WidgetStateProperty.all<Size>(
+                      const Size(double.infinity, 50),
+                    ),
                     foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
                     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100.0),
-
                       ),
                     ),
                   ),
