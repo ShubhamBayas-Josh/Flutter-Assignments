@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 class DetailsPage extends StatelessWidget {
   final String data;
 
-  const DetailsPage({required this.data});
+  const DetailsPage({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Details Page')),
+      appBar: AppBar(title: const Text('Details Page')),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.black, Colors.greenAccent,Colors.black],
+            colors: [Colors.black, Colors.greenAccent, Colors.black],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -23,14 +23,16 @@ class DetailsPage extends StatelessWidget {
             children: [
               Text(
                 'Received: $data',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                style: const TextStyle(fontSize: 18, color: Colors.white),
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                child: Text('Go Back with Data'),
-                onPressed: () {
-                  Navigator.pop(context, 'Data from Details!');
-                },
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context, 'Data from Details!');
+                  },
+                  child: const Text('Go Back with Data'),
+                ),
               ),
             ],
           ),
