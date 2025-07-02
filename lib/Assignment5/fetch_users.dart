@@ -27,7 +27,7 @@ class _FetchUsersPageState extends State<FetchUsersPage> {
         url,
         headers: {
           'Accept': 'application/json',
-          'User-Agent': 'FlutterApp', // This prevents 403 error
+          'User-Agent': 'FlutterApp',
         },
       );
 
