@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class FetchUsersPage extends StatefulWidget {
-  const FetchUsersPage({super.key});
+class UserListPage extends StatefulWidget {
+  const UserListPage({super.key});
 
   @override
-  State<FetchUsersPage> createState() => _FetchUsersPageState();
+  State<UserListPage> createState() => _UserListPageState();
 }
 
-class _FetchUsersPageState extends State<FetchUsersPage> {
+class _UserListPageState extends State<UserListPage> {
   List users = [];
   bool isLoading = false;
   String errorMessage = '';

@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Simple Fetch App',
-      home: const FetchUsersPage(),
+      home: const UserListPage(),
     );
   }
 }
