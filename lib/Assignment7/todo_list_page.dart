@@ -14,6 +14,12 @@ class TodoListPage extends ConsumerStatefulWidget {
 class _TodoListPageState extends ConsumerState<TodoListPage> {
   final TextEditingController _controller = TextEditingController();
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   void _addTodoItem() {
     ref.read(todoListProvider.notifier).add(_controller.text);
     _controller.clear();
