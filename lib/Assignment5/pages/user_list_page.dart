@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../models/user.dart';
+
 class UserListPage extends StatefulWidget {
   const UserListPage({super.key});
 
@@ -10,7 +12,7 @@ class UserListPage extends StatefulWidget {
 }
 
 class _UserListPageState extends State<UserListPage> {
-  List users = [];
+  List<User> users = [];
   bool isLoading = false;
   String errorMessage = '';
 
@@ -23,17 +25,12 @@ class _UserListPageState extends State<UserListPage> {
     final url = Uri.parse('https://jsonplaceholder.typicode.com/users');
 
     try {
-      final response = await http.get(
-        url,
-        headers: {
-          'Accept': 'application/json',
-          'User-Agent': 'FlutterApp',
-        },
-      );
+      final response = await http.get(url);
 
       if (response.statusCode == 200) {
+        final List data = json.decode(response.body);
         setState(() {
-          users = json.decode(response.body);
+          users = data.map((e) => User.fromJson(e)).toList();
           isLoading = false;
         });
       } else {
@@ -53,28 +50,24 @@ class _UserListPageState extends State<UserListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Simple Fetch Users'),
+      appBar: AppBar(
+        title: const Text('User List'),
         centerTitle: true,
       ),
       body: Column(
         children: [
           const SizedBox(height: 20),
-          Center(
-            child: ElevatedButton(
-              onPressed: fetchUsers,
-              child: const Text('Fetch Users'),
-            ),
+          ElevatedButton(
+            onPressed: fetchUsers,
+            child: const Text('Fetch Users'),
           ),
           const SizedBox(height: 20),
           if (isLoading)
             const CircularProgressIndicator()
           else if (errorMessage.isNotEmpty)
-            Text(
-              errorMessage,
-              style: const TextStyle(color: Colors.red),
-            )
+            Text(errorMessage, style: const TextStyle(color: Colors.red))
           else if (users.isEmpty)
-              const Text('No users. Click button to fetch.')
+              const Text('No users found. Click the button.')
             else
               Expanded(
                 child: ListView.builder(
@@ -83,10 +76,10 @@ class _UserListPageState extends State<UserListPage> {
                     final user = users[index];
                     return ListTile(
                       leading: CircleAvatar(
-                        child: Text(user['name'][0]),
+                        child: Text(user.name[0]),
                       ),
-                      title: Text(user['name']),
-                      subtitle: Text(user['email']),
+                      title: Text(user.name),
+                      subtitle: Text(user.email),
                     );
                   },
                 ),
