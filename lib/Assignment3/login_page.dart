@@ -26,11 +26,11 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 30),
-                Image.network(
-                  'https://cdn-icons-png.flaticon.com/512/8449/8449978.png',
-                  height: 120,
-                  width: 120,
-                ),
+                // Image.network(
+                //   'https://cdn-icons-png.flaticon.com/512/8449/8449978.png',
+                //   height: 120,
+                //   width: 120,
+                // ),
                 const SizedBox(height: 20),
                 const Text(
                   'Food Link',
